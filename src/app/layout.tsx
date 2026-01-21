@@ -1,0 +1,32 @@
+import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/shared/header";
+import Footer from "@/components/shared/Footer";
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+});
+
+export const metadata: Metadata = {
+  title: "Nile Developments",
+  description: "Nile Developments - Real Estate Projects",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${roboto.variable} antialiased font-sans`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
+}
