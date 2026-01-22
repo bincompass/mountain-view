@@ -1,8 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-  MapPin,
-  Mail,
   Phone,
   Video,
   MessageCircle,
@@ -14,23 +15,31 @@ import {
 
 const footerLinks = {
   links: [
-    { name: "Homepage", href: "/" },
-    { name: "About us", href: "/about-us" },
-    { name: "Our masterpieces", href: "/masterpieces" },
-    { name: "Contact Us", href: "/contact-us" },
+    { name: "About Us", href: "/", scrollTo: "about-us" },
+    { name: "Our Legacy", href: "/", scrollTo: "stats" },
+    { name: "Contact", href: "/", scrollTo: "contact" },
   ],
   projects: [
-    { name: "Tycoon Tower", href: "/projects/tycoon-tower" },
-    { name: "Nile Boulevard", href: "/projects/nile-boulevard" },
-    { name: "Nile Business City", href: "/projects/nile-business-city" },
-    { name: "31 North Tower - The New Capital", href: "/projects/31-north" },
+    { name: "Tycoon Tower", href: "/", scrollTo: "projects" },
+    { name: "Nile Boulevard", href: "/", scrollTo: "projects" },
+    { name: "Nile Business City", href: "/", scrollTo: "projects" },
+    {
+      name: "31 North Tower - The New Capital",
+      href: "/",
+      scrollTo: "projects",
+    },
   ],
   contact: [
     { name: "16783", href: "tel:16783", icon: Phone },
-    { name: "Schedule Meeting", href: "#", icon: Video },
+    {
+      name: "Schedule Meeting",
+      href: "/",
+      icon: Video,
+      scrollTo: "contact",
+    },
     {
       name: "Contact via WhatsApp",
-      href: "https://wa.me/...",
+      href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2016783"}`,
       icon: MessageCircle,
     },
   ],
@@ -43,6 +52,22 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    scrollTo?: string,
+  ) => {
+    if (scrollTo) {
+      e.preventDefault();
+      const element = document.getElementById(scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   return (
     <footer className="bg-black text-white pt-20 pb-10">
       <div className="container">
@@ -58,26 +83,6 @@ export default function Footer() {
                 className="h-14 w-auto brightness-0 invert"
               />
             </Link>
-
-            <div className="space-y-4">
-              <div className="flex items-start gap-4 group">
-                <MapPin className="w-5 h-5 text-[#b89156] mt-1 shrink-0" />
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  New Cairo 1, Cairo Governorate
-                  <br />
-                  4760121
-                </p>
-              </div>
-              <div className="flex items-center gap-4 group">
-                <Mail className="w-5 h-5 text-[#b89156] shrink-0" />
-                <a
-                  href="mailto:info@nile-developments.com"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  info@nile-developments.com
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Links Column */}
@@ -88,6 +93,9 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    onClick={(e) =>
+                      isHomePage && handleSmoothScroll(e, link.scrollTo)
+                    }
                     className="text-sm text-gray-400 hover:text-white transition-colors font-light"
                   >
                     {link.name}
@@ -107,6 +115,9 @@ export default function Footer() {
                 <li key={project.name}>
                   <Link
                     href={project.href}
+                    onClick={(e) =>
+                      isHomePage && handleSmoothScroll(e, project.scrollTo)
+                    }
                     className="text-sm text-gray-400 hover:text-white transition-colors font-light"
                   >
                     {project.name}
@@ -122,7 +133,18 @@ export default function Footer() {
             <ul className="space-y-6">
               {footerLinks.contact.map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="flex items-center gap-4 group">
+                  <a
+                    href={item.href}
+                    onClick={(e) => {
+                      if (item.scrollTo && isHomePage) {
+                        handleSmoothScroll(
+                          e as unknown as React.MouseEvent<HTMLAnchorElement>,
+                          item.scrollTo,
+                        );
+                      }
+                    }}
+                    className="flex items-center gap-4 group"
+                  >
                     <div className="w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-[#b89156]/10 transition-colors">
                       <item.icon className="w-5 h-5 text-[#b89156]" />
                     </div>
