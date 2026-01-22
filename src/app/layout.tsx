@@ -14,7 +14,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Nile Developments | The pioneer of skyscrapers",
-  description: "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
+  description:
+    "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
   keywords: [
     "Nile Developments",
     "Egyptian real estate",
@@ -38,14 +39,15 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nile-developments.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Nile Developments | The pioneer of skyscrapers",
-    description: "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://nile-developments.com",
+    description:
+      "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
     siteName: "Nile Developments",
     locale: "en_US",
     type: "website",
@@ -61,7 +63,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nile Developments | The pioneer of skyscrapers",
-    description: "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
+    description:
+      "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
     images: ["/assets/images/heros/hero.jpg"],
   },
   robots: {
@@ -77,7 +80,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "mKPew9mPrvWBPJBpkivwnRSKuc_hwbqSPE5YbxXmtak",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
 
