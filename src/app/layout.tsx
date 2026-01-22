@@ -38,14 +38,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://nile-developments.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nile-developments.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Nile Developments | The pioneer of skyscrapers",
     description: "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
-    url: "https://nile-developments.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://nile-developments.com",
     siteName: "Nile Developments",
     locale: "en_US",
     type: "website",

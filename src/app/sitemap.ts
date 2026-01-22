@@ -1,33 +1,35 @@
 import { MetadataRoute } from 'next'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nile-developments.com';
  
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://nile-developments.com',
+      url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://nile-developments.com/#about-us',
+      url: `${baseUrl}/#about-us`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://nile-developments.com/#projects',
+      url: `${baseUrl}/#projects`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://nile-developments.com/#properties',
+      url: `${baseUrl}/#properties`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://nile-developments.com/#contact',
+      url: `${baseUrl}/#contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,

@@ -45,6 +45,7 @@ export default function Navbar({ className }: { className?: string }) {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const [open, setOpen] = useState(false);
+  const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "16783";
 
   return (
     <>
@@ -77,11 +78,11 @@ export default function Navbar({ className }: { className?: string }) {
       {/* Call Action & Mobile Menu */}
       <div className="flex items-center gap-4">
         <a
-          href="tel:16783"
+          href={`tel:${phoneNumber}`}
           className="hidden lg:flex items-center gap-2 h-8 px-2 xl:px-3 text-[10px] xl:text-[12px] font-bold transition-all hover:bg-primary hover:text-white rounded-full bg-transparent text-foreground focus:bg-primary focus:text-white uppercase tracking-tight"
         >
           <Phone className="h-3 w-3 xl:h-4 xl:w-4" />
-          <span>16783</span>
+          <span>{phoneNumber}</span>
         </a>
 
         {/* Mobile Menu */}
@@ -114,12 +115,12 @@ export default function Navbar({ className }: { className?: string }) {
               <div className="pt-6 mt-auto border-t">
                 <Button asChild variant="default" size="lg" className="w-full">
                   <a
-                    href="tel:16783"
+                    href={`tel:${phoneNumber}`}
                     onClick={() => setOpen(false)}
                     className="flex items-center gap-3"
                   >
                     <Phone className="h-5 w-5" />
-                    <span>16783</span>
+                    <span>{phoneNumber}</span>
                   </a>
                 </Button>
               </div>

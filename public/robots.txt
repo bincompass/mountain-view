@@ -4,3 +4,4 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://nile-developments.com/sitemap.xml
+# Note: Update this URL based on your environment

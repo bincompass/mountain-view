@@ -1,11 +1,13 @@
 export default function StructuredData() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nile-developments.com';
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Nile Developments",
     "alternateName": "Nile Development Group",
-    "url": "https://nile-developments.com",
-    "logo": "https://nile-developments.com/assets/images/logos/main-logo.svg",
+    "url": baseUrl,
+    "logo": `${baseUrl}/assets/images/logos/main-logo.svg`,
     "description": "Nile Developments is an Egyptian joint stock company listed on the Stock Exchange and the Investment Authority. It established by Eng. Mohamed Taher and Mr. Mahmoud Taher",
     "foundingDate": "2002",
     "founder": [
@@ -34,11 +36,11 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Nile Developments",
-    "url": "https://nile-developments.com",
+    "url": baseUrl,
     "description": "The pioneer of skyscrapers in Egypt",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://nile-developments.com/?s={search_term_string}",
+      "target": `${baseUrl}/?s={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };
@@ -47,8 +49,8 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "Nile Developments",
-    "url": "https://nile-developments.com",
-    "logo": "https://nile-developments.com/assets/images/logos/main-logo.svg",
+    "url": baseUrl,
+    "logo": `${baseUrl}/assets/images/logos/main-logo.svg`,
     "description": "Leading real estate developer in New Administrative Capital, New Cairo, and Al Mansoura",
     "areaServed": [
       {
@@ -74,25 +76,25 @@ export default function StructuredData() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://nile-developments.com"
+        "item": baseUrl
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "About Us",
-        "item": "https://nile-developments.com/#about-us"
+        "item": `${baseUrl}/#about-us`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Projects",
-        "item": "https://nile-developments.com/#projects"
+        "item": `${baseUrl}/#projects`
       },
       {
         "@type": "ListItem",
         "position": 4,
         "name": "Properties",
-        "item": "https://nile-developments.com/#properties"
+        "item": `${baseUrl}/#properties`
       }
     ]
   };

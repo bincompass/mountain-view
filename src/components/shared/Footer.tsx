@@ -13,6 +13,8 @@ import {
   Linkedin,
 } from "lucide-react";
 
+const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "16783";
+
 const footerLinks = {
   links: [
     { name: "About Us", href: "/", scrollTo: "about-us" },
@@ -30,7 +32,7 @@ const footerLinks = {
     },
   ],
   contact: [
-    { name: "16783", href: "tel:16783", icon: Phone },
+    { name: phoneNumber, href: `tel:${phoneNumber}`, icon: Phone },
     {
       name: "Schedule Meeting",
       href: "/",
