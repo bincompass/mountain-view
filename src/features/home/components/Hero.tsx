@@ -42,7 +42,11 @@ export default function Hero() {
           <motion.span
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{
+              duration: 0.8,
+              delay: 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
             className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-none"
           >
             Where No <br className="md:hidden" /> Competition
@@ -50,7 +54,11 @@ export default function Hero() {
           <motion.span
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{
+              duration: 0.8,
+              delay: 0.6,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
             className="text-[#f24e1e] text-6xl sm:text-8xl md:text-8xl lg:text-9xl font-serif italic uppercase leading-[0.8] mt-2 md:mt-4"
           >
             Reaches

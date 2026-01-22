@@ -23,6 +23,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <noscript>
+          <style>{`
+            /* Ensure all content is visible when JavaScript is disabled */
+            * {
+              opacity: 1 !important;
+              transform: none !important;
+            }
+          `}</style>
+        </noscript>
+      </head>
       <body className={`${roboto.variable} antialiased font-sans`}>
         <Header />
         {children}
