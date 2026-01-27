@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export default function FloatingActions() {
   const [isScrollVisible, setIsScrollVisible] = useState(false);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2016783"; // Fallback number
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER; // Fallback number
 
   useEffect(() => {
     const toggleVisibility = () => {

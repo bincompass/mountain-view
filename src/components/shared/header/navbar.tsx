@@ -45,7 +45,7 @@ export default function Navbar({ className }: { className?: string }) {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const [open, setOpen] = useState(false);
-  const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "16783";
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
   return (
     <>

@@ -13,7 +13,7 @@ import {
   Linkedin,
 } from "lucide-react";
 
-const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER || "16783";
+const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
 const footerLinks = {
   links: [
@@ -41,7 +41,7 @@ const footerLinks = {
     },
     {
       name: "Contact via WhatsApp",
-      href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "2016783"}`,
+      href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`,
       icon: MessageCircle,
     },
   ],
