@@ -49,8 +49,7 @@ export default function RegisterInterest() {
   const onSubmit = async (data: FormValues) => {
     setSubmitStatus({ type: null, message: "" });
     try {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL || "https://api.incompassonline.com";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await fetch(`${baseUrl}/api/incompass/send-email`, {
         method: "POST",
         headers: {
