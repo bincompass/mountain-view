@@ -3,7 +3,6 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/Footer";
-import ScrollToTop from "@/components/shared/ScrollToTop";
 import StructuredData from "@/components/shared/StructuredData";
 
 const roboto = Roboto({
@@ -13,9 +12,9 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "شركة النيل للتطوير العقاري | رواد ناطحات السحاب",
+  title: "Mountain View | Luxury Real Estate & Gated Communities in Egypt",
   description:
-    "نايل للتطوير العقاري هي شركة مساهمة مصرية ومقيدة بالبورصة وهيئة الاستثمار أسست بواسطة المهندس محمد طاهر و الأستاذ محمود طاهر.",
+    "Mountain View is a leading private property developer in Egypt, specializing in first-tier residences and luxury resorts. Discover our projects across East and West Cairo, the Red Sea, and North Coast.",
   icons: {
     icon: "/fav-icon.png",
     shortcut: "/fav-icon.png",
@@ -26,27 +25,23 @@ export const metadata: Metadata = {
     },
   },
   keywords: [
-    "نايل للتطوير العقاري",
-    "شركة نايل",
-    "العقارات المصرية",
-    "ناطحات السحاب مصر",
-    "العاصمة الإدارية الجديدة",
-    "القاهرة الجديدة",
-    "المنصورة",
-    "مطور عقاري",
-    "برج تايكون",
-    "31 نورث تاور",
-    "نايل بيزنس سيتي",
-    "نايل بوليفارد",
-    "الأبراج التجارية مصر",
-    "المجمعات السكنية مصر",
-    "Nile Developments",
-    "Egyptian real estate",
-    "New Administrative Capital",
+    "Mountain View Egypt",
+    "Mountain View Projects",
+    "Real Estate Egypt",
+    "Luxury Gated Communities",
+    "Mountain View North Coast",
+    "Mountain View iCity",
+    "Mountain View Ras El Hikma",
+    "Mountain View Hyde Park",
+    "Mountain View October",
+    "Mountain View New Cairo",
+    "Property Development Egypt",
+    "Luxury Villas Egypt",
+    "Mountain View Chillout Park",
   ],
-  authors: [{ name: "Nile Developments" }],
-  creator: "Nile Developments",
-  publisher: "Nile Developments",
+  authors: [{ name: "Mountain View" }],
+  creator: "Mountain View",
+  publisher: "Mountain View",
   formatDetection: {
     email: false,
     address: false,
@@ -57,28 +52,28 @@ export const metadata: Metadata = {
     canonical: process.env.NEXT_PUBLIC_SITE_URL,
   },
   openGraph: {
-    title: "شركة النيل للتطوير العقاري | رواد ناطحات السحاب",
+    title: "Mountain View | Luxury Real Estate & Gated Communities in Egypt",
     description:
-      "نايل للتطوير العقاري هي شركة مساهمة مصرية ومقيدة بالبورصة وهيئة الاستثمار أسست بواسطة المهندس محمد طاهر و الأستاذ محمود طاهر.",
+      "Leading developer of luxury residences and resorts in Egypt. Inspired by happiness, driven by innovation.",
     url: process.env.NEXT_PUBLIC_SITE_URL,
-    siteName: "Nile Developments",
-    locale: "ar_AR",
+    siteName: "Mountain View",
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/assets/images/heros/hero.jpg",
+        url: "/assets/images/logos/logo-blue.png",
         width: 1200,
         height: 630,
-        alt: "شركة نايل للتطوير العقاري - رائدة ناطحات السحاب",
+        alt: "Mountain View - Inspired by Happiness",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "شركة النيل للتطوير العقاري | رواد ناطحات السحاب",
+    title: "Mountain View | Luxury Real Estate & Gated Communities in Egypt",
     description:
-      "نايل للتطوير العقاري هي شركة مساهمة مصرية ومقيدة بالبورصة وهيئة الاستثمار أسست بواسطة المهندس محمد طاهر و الأستاذ محمود طاهر.",
-    images: ["/assets/images/heros/hero.jpg"],
+      "Leading developer of luxury residences and resorts in Egypt. Inspired by happiness, driven by innovation.",
+    images: ["/assets/images/logos/logo-blue.png"],
   },
   robots: {
     index: true,
@@ -120,7 +115,6 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <ScrollToTop />
       </body>
     </html>
   );

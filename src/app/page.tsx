@@ -1,21 +1,21 @@
 import Hero from "@/features/home/components/Hero";
 import Projects from "@/features/home/components/Projects";
-import StatsSection from "@/features/home/components/StatsSection";
-import About from "@/features/home/components/About";
-import PropertyHighlights from "@/features/home/components/PropertyHighlights";
-import RegisterInterest from "@/features/home/components/RegisterInterest";
-import FloatingActions from "@/components/shared/FloatingActions";
+import CommunitySection from "@/features/home/components/CommunitySection";
+import EviaSection from "@/features/home/components/EviaSection";
+import InnovationSection from "@/features/home/components/InnovationSection";
+import LighthouseSection from "@/features/home/components/LighthouseSection";
+import LatestNews from "@/features/home/components/LatestNews";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <About />
+      <CommunitySection />
       <Projects />
-      <PropertyHighlights />
-      <FloatingActions />
-      <StatsSection />
-      <RegisterInterest />
+      <EviaSection />
+      <InnovationSection />
+      <LighthouseSection />
+      <LatestNews />
     </main>
   );
 }

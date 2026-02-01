@@ -4,27 +4,17 @@ export default function StructuredData() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "شركة النيل للتطوير العقاري",
-    alternateName: "Nile Developments",
+    name: "Mountain View",
+    alternateName: "ماونتن فيو",
     url: baseUrl,
-    logo: `${baseUrl}/assets/images/logos/main-logo.svg`,
+    logo: `${baseUrl}/assets/images/logos/logo-blue.png`,
     description:
-      "نايل للتطوير العقاري هي شركة مساهمة مصرية ومقيدة بالبورصة وهيئة الاستثمار أسست بواسطة المهندس محمد طاهر و الأستاذ محمود طاهر.",
-    "foundingDate": "2002",
-    "founder": [
-      {
-        "@type": "Person",
-        "name": "المهندس محمد طاهر"
-      },
-      {
-        "@type": "Person",
-        "name": "الأستاذ محمود طاهر"
-      }
-    ],
+      "Mountain View is a leading private property developer in Egypt, specializing in first-tier residences and luxury resorts.",
+    foundingDate: "2005",
     sameAs: [
-      "https://www.facebook.com/niledevelopmentseg",
-      "https://www.instagram.com/niledevelopmentseg",
-      "https://www.linkedin.com/company/nile-developments",
+      "https://www.facebook.com/MountainViewEgypt",
+      "https://www.instagram.com/mountainviewegypt",
+      "https://www.linkedin.com/company/mountain-view-egypt",
     ],
     address: {
       "@type": "PostalAddress",
@@ -36,9 +26,9 @@ export default function StructuredData() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "شركة النيل للتطوير العقاري",
-    "url": baseUrl,
-    "description": "رواد ناطحات السحاب في مصر",
+    name: "Mountain View",
+    url: baseUrl,
+    description: "Inspired by Happiness",
     potentialAction: {
       "@type": "SearchAction",
       target: `${baseUrl}/?s={search_term_string}`,
@@ -49,56 +39,66 @@ export default function StructuredData() {
   const realEstateSchema = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    name: "شركة النيل للتطوير العقاري",
+    name: "Mountain View",
     url: baseUrl,
-    logo: `${baseUrl}/assets/images/logos/main-logo.svg`,
+    logo: `${baseUrl}/assets/images/logos/logo-blue.png`,
     description:
-      "شركة رائدة في التطوير العقاري في العاصمة الإدارية الجديدة والقاهرة الجديدة والمنصورة",
-    "areaServed": [
+      "Leading developer of luxury residences and resorts in East and West Cairo, the Red Sea, and North Coast.",
+    areaServed: [
       {
         "@type": "City",
-        "name": "العاصمة الإدارية الجديدة"
+        name: "New Cairo",
       },
       {
         "@type": "City",
-        "name": "القاهرة الجديدة"
+        name: "6th of October",
       },
       {
         "@type": "City",
-        "name": "المنصورة"
-      }
-    ]
+        name: "North Coast",
+      },
+      {
+        "@type": "City",
+        name: "Ain Sokhna",
+      },
+    ],
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "الرئيسية",
-        "item": baseUrl
+        position: 1,
+        name: "Home",
+        item: baseUrl,
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "من نحن",
-        "item": `${baseUrl}/#about-us`
+        position: 2,
+        name: "Communities",
+        item: `${baseUrl}/#projects`,
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": "مشاريعنا",
-        "item": `${baseUrl}/#projects`
+        position: 3,
+        name: "Evia",
+        item: `${baseUrl}/#evia`,
       },
       {
         "@type": "ListItem",
-        "position": 4,
-        "name": "العقارات",
-        "item": `${baseUrl}/#properties`
-      }
-    ]
+        position: 4,
+        name: "Innovation",
+        item: `${baseUrl}/#innovation`,
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "Contact Us",
+        item: `${baseUrl}/calendly`,
+      },
+    ],
   };
 
   return (

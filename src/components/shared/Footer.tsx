@@ -4,58 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Phone,
-  Video,
-  MessageCircle,
   Facebook,
   Instagram,
   Youtube,
   Linkedin,
+  Twitter,
+  ArrowRight,
+  ChevronUp,
 } from "lucide-react";
-
-const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+import { motion } from "framer-motion";
 
 const footerLinks = {
-  links: [
-    { name: "About Us", href: "/", scrollTo: "about-us" },
-    { name: "Our Legacy", href: "/", scrollTo: "stats" },
-    { name: "Contact", href: "/", scrollTo: "register-interest" },
+  company: [
+    { name: "Life at MV", href: "/" },
+    { name: "Our Story", href: "/", scrollTo: "story-section" },
+    { name: "Sustainability", href: "/" },
+    { name: "MV Foundation", href: "/" },
+    { name: "Media Room", href: "/", scrollTo: "news" },
+    { name: "E-Services", href: "/" },
   ],
-  projects: [
-    { name: "Tycoon Tower", href: "/", scrollTo: "projects" },
-    { name: "Nile Boulevard", href: "/", scrollTo: "projects" },
-    { name: "Nile Business City", href: "/", scrollTo: "projects" },
-    {
-      name: "31 North Tower - The New Capital",
-      href: "/",
-      scrollTo: "projects",
-    },
-  ],
-  contact: [
-    { name: phoneNumber, href: `tel:${phoneNumber}`, icon: Phone },
-    {
-      name: "Schedule Meeting",
-      href: "/",
-      icon: Video,
-      scrollTo: "register-interest",
-    },
-    {
-      name: "Contact via WhatsApp",
-      href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`,
-      icon: MessageCircle,
-    },
+  help: [
+    { name: "Contact Us", href: "/", scrollTo: "register-interest" },
+    { name: "Careers", href: "/" },
   ],
   socials: [
-    { icon: Facebook, href: "https://www.facebook.com/NileDevelopments/" },
-    { icon: Instagram, href: "https://www.instagram.com/nile.developments/" },
-    {
-      icon: Youtube,
-      href: "https://www.youtube.com/channel/UCYYiCSUHU8GVWtj0_pOwZdQ",
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/company/nile-developments/",
-    },
+    { icon: Facebook, href: "#" },
+    { icon: Twitter, href: "#" },
+    { icon: Instagram, href: "#" },
+    { icon: Linkedin, href: "#" },
+    { icon: Youtube, href: "#" },
   ],
 };
 
@@ -64,7 +41,7 @@ export default function Footer() {
   const isHomePage = pathname === "/";
 
   const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
     scrollTo?: string,
   ) => {
     if (scrollTo) {
@@ -76,115 +53,288 @@ export default function Footer() {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-black text-white pt-20 pb-10">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
-          {/* Logo and Contact Info */}
-          <div className="space-y-8">
-            <Link href="/" className="block">
-              <Image
-                src="/assets/images/logos/main-logo.svg"
-                alt="Nile Developments Logo"
-                width={180}
-                height={70}
-                className="h-14 w-auto brightness-0 invert"
+    <footer className="bg-[#000F3D] text-white pt-12 pb-8 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-32">
+        {/* Top Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="flex flex-col md:flex-row justify-between items-center pb-12 border-b border-white/10 gap-8"
+        >
+          <div className="flex items-center gap-8 flex-wrap justify-center lg:justify-start">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.1,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <Link href="/" className="block">
+                <Image
+                  src="/assets/images/logos/main-logo.png"
+                  alt="Mountain View Logo"
+                  width={220}
+                  height={60}
+                  className="h-10 md:h-12 w-auto brightness-0 invert"
+                />
+              </Link>
+            </motion.div>
+            <div className="hidden md:block w-px h-8 bg-white/20" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.2,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+              className="flex items-center gap-5"
+            >
+              {footerLinks.socials.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.3 + index * 0.1,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  }}
+                  className="text-white/60 hover:text-white transition-all hover:scale-110"
+                >
+                  <social.icon className="w-5 h-5" />
+                </motion.a>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: 0.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            onClick={scrollToTop}
+            className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors group"
+          >
+            <ChevronUp className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+          </motion.button>
+        </motion.div>
+
+        {/* Main Footer Content */}
+        <div className="py-20 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
+          {/* Newsletter Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.8,
+              delay: 0.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="lg:col-span-6 space-y-8"
+          >
+            <div className="space-y-4">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.3,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+                className="text-4xl md:text-5xl font-normal tracking-tight"
+              >
+                Stay in the Loop.
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.4,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+                className="text-white/60 text-lg font-light max-w-md leading-relaxed"
+              >
+                Sign up to receive the latest updates on new projects, exclusive
+                offers and events.
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.5,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+              className="relative max-w-md"
+            >
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full bg-white text-[#000F3D] px-6 py-5 rounded-sm outline-none placeholder:text-[#000F3D]/40 text-lg"
               />
-            </Link>
-          </div>
+              <button className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-[#001A70] hover:translate-x-1 transition-transform">
+                <ArrowRight className="w-6 h-6" />
+              </button>
+            </motion.div>
+          </motion.div>
 
-          {/* Links Column */}
-          <div>
-            <h4 className="text-lg font-serif mb-8 tracking-wider">Links</h4>
-            <ul className="space-y-4">
-              {footerLinks.links.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    onClick={(e) =>
-                      isHomePage && handleSmoothScroll(e, link.scrollTo)
-                    }
-                    className="text-sm text-gray-400 hover:text-white transition-colors font-light"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Projects Column */}
-          <div>
-            <h4 className="text-lg font-serif mb-8 tracking-wider">
-              Our Projects
-            </h4>
-            <ul className="space-y-4">
-              {footerLinks.projects.map((project) => (
-                <li key={project.name}>
-                  <Link
-                    href={project.href}
-                    onClick={(e) =>
-                      isHomePage && handleSmoothScroll(e, project.scrollTo)
-                    }
-                    className="text-sm text-gray-400 hover:text-white transition-colors font-light"
-                  >
-                    {project.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Call Us Column */}
-          <div>
-            <h4 className="text-lg font-serif mb-8 tracking-wider">Call Us</h4>
-            <ul className="space-y-6">
-              {footerLinks.contact.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    onClick={(e) => {
-                      if (item.scrollTo && isHomePage) {
-                        handleSmoothScroll(
-                          e as unknown as React.MouseEvent<HTMLAnchorElement>,
-                          item.scrollTo,
-                        );
-                      }
+          {/* Links Sections */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.8,
+              delay: 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="lg:col-span-6 grid grid-cols-2 gap-8 lg:justify-items-end"
+          >
+            <div className="space-y-8">
+              <motion.h4
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.4,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+                className="text-[12px] tracking-[0.2em] uppercase text-white/40 font-medium"
+              >
+                COMPANY
+              </motion.h4>
+              <ul className="space-y-4">
+                {footerLinks.company.map((link, index) => (
+                  <motion.li
+                    key={link.name}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.5 + index * 0.05,
+                      ease: [0.25, 0.1, 0.25, 1],
                     }}
-                    className="flex items-center gap-4 group"
                   >
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-[#b89156]/10 transition-colors">
-                      <item.icon className="w-5 h-5 text-[#b89156]" />
-                    </div>
-                    <span className="text-sm text-gray-400 group-hover:text-white transition-colors font-light">
-                      {item.name}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <Link
+                      href={link.href}
+                      onClick={(e) =>
+                        isHomePage && handleSmoothScroll(e, link.scrollTo)
+                      }
+                      className="text-base text-white/80 hover:text-white transition-colors font-light"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-8">
+              <motion.h4
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.4,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+                className="text-[12px] tracking-[0.2em] uppercase text-white/40 font-medium"
+              >
+                HELP
+              </motion.h4>
+              <ul className="space-y-4">
+                {footerLinks.help.map((link, index) => (
+                  <motion.li
+                    key={link.name}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.5 + index * 0.05,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={(e) =>
+                        isHomePage && handleSmoothScroll(e, link.scrollTo)
+                      }
+                      className="text-base text-white/80 hover:text-white transition-colors font-light"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-gray-500 font-light text-center md:text-left">
-            © 2026 Nile Developments - Privacy policy Carefully crafted by{" "}
-            <span className="text-white">Right Mind ©</span>
-          </p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+          className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: 0.5,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="text-sm text-white/40 font-light"
+          >
+            Copyright © 2026 Mountain View. All rights reserved.
+          </motion.p>
 
-          <div className="flex items-center gap-6">
-            {footerLinks.socials.map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                className="text-gray-400 hover:text-white transition-all hover:scale-110"
-              >
-                <social.icon className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
-        </div>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: 0.6,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="text-sm text-white/40 font-light"
+          >
+            Design & Development by Mitch Designs
+          </motion.p>
+        </motion.div>
       </div>
     </footer>
   );

@@ -1,25 +1,32 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Navbar from "./navbar";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isCalendlyPage = pathname === "/calendly";
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm">
-      <div className="container flex h-20 items-center justify-between">
+    <header className="absolute top-0 z-50 w-full bg-white lg:bg-transparent border-b border-gray-100 lg:border-none">
+      <div className="container flex h-20 lg:h-24 items-center justify-between py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/assets/images/logos/main-logo.svg"
-            alt="Nile Developments Logo"
+            src="/assets/images/logos/logo-blue.png"
+            alt="Mountain View Logo"
             width={150}
             height={60}
-            className="h-12 w-auto"
+            className={`h-8 lg:h-12 w-auto ${!isCalendlyPage ? "lg:brightness-0 lg:invert" : ""}`}
             priority
           />
         </Link>
 
         {/* Desktop Navbar & Mobile Menu */}
-        <Navbar />
+        <div className="lg:fixed lg:top-6 lg:right-6 xl:lg:right-32 z-50">
+          <Navbar />
+        </div>
       </div>
     </header>
   );

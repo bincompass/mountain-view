@@ -1,116 +1,236 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import StaggerContainer, { StaggerItem } from "@/components/shared/StaggerContainer";
+
+const projects = [
+  {
+    id: 1,
+    title: "Plage",
+    description:
+      "Welcome to the latest seaside destination by Mountain View. Everything you love about exclusive coastal living with a mix of experiences made for all sea lovers.",
+    image: "/assets/images/projects/project-one.webp",
+    tags: ["SEASONAL", "NORTH COAST"],
+  },
+  {
+    id: 2,
+    title: "EVIA - MV Ras El",
+    description:
+      "Inspired by the essence of the life a place where families can make memories that last a life.",
+    image: "/assets/images/projects/project-two.webp",
+    tags: ["SEASONAL", "NORTH COAST"],
+  },
+  {
+    id: 3,
+    title: "Skala",
+    description:
+      "Experience the true meaning of summer at Skala, where every moment is a celebration of life and beauty.",
+    image: "/assets/images/projects/project-three.webp",
+    tags: ["SEASONAL", "NORTH COAST"],
+  },
+  {
+    id: 4,
+    title: "Paros",
+    description:
+      "Discover the serenity of Paros, a place where luxury meets nature in perfect harmony.",
+    image: "/assets/images/projects/project-four.webp",
+    tags: ["SEASONAL", "NORTH COAST"],
+  },
+  {
+    id: 5,
+    title: "Crete Islands",
+    description:
+      "A unique destination that offers a blend of tradition and modernity, perfect for those seeking a peaceful retreat.",
+    image: "/assets/images/projects/project-five.webp",
+    tags: ["SEASONAL", "NORTH COAST"],
+  },
+];
 
 export default function Projects() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
+    {
+      initial: 0,
+      loop: true,
+      slideChanged(slider) {
+        setCurrentSlide(slider.track.details.rel);
+      },
+      created() {
+        setLoaded(true);
+      },
+      breakpoints: {
+        "(min-width: 640px)": {
+          slides: { perView: 1.2, spacing: 24 },
+        },
+        "(min-width: 1024px)": {
+          slides: { perView: 2.2, spacing: 32 },
+        },
+      },
+      slides: { perView: 1.05, spacing: 16 },
+    },
+    [
+      (slider) => {
+        let timeout: ReturnType<typeof setTimeout>;
+        let mouseOver = false;
+        function clearNextTimeout() {
+          clearTimeout(timeout);
+        }
+        function nextTimeout() {
+          clearTimeout(timeout);
+          if (mouseOver) return;
+          timeout = setTimeout(() => {
+            slider.next();
+          }, 3000);
+        }
+        slider.on("created", () => {
+          slider.container.addEventListener("mouseover", () => {
+            mouseOver = true;
+            clearNextTimeout();
+          });
+          slider.container.addEventListener("mouseout", () => {
+            mouseOver = false;
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+        slider.on("dragStarted", clearNextTimeout);
+        slider.on("animationEnded", nextTimeout);
+        slider.on("updated", nextTimeout);
+      },
+    ]
+  );
+
   return (
-    <section
-      id="projects"
-      className="relative pt-15 px-6 md:px-20 bg-white overflow-hidden"
-    >
-      {/* Section Header */}
-      <StaggerContainer staggerDelay={0.1} initialDelay={0.2} className="flex flex-col items-center text-center mb-16">
-        <StaggerItem direction="down">
-          <h2 className="text-[#b89156] text-lg md:text-2xl font-bold uppercase tracking-[0.3em] mb-8">
-            Our Projects
-          </h2>
-        </StaggerItem>
+    <section id="projects" className="pb-24 bg-white overflow-hidden relative">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        className="relative px-6 md:px-20"
+      >
+        {/* Navigation Arrows */}
+        {loaded && (
+          <>
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              onClick={(e) => {
+                e.stopPropagation();
+                instanceRef.current?.prev();
+              }}
+              className="absolute left-2 md:left-10 top-[30%] -translate-y-1/2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-xl transition-all group active:scale-90 z-20 border border-gray-100 cursor-pointer hover:bg-[#003da6]"
+            >
+              <ChevronLeft className="h-6 w-6 text-[#003da6] transition-colors group-hover:text-white" />
+            </motion.button>
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              onClick={(e) => {
+                e.stopPropagation();
+                instanceRef.current?.next();
+              }}
+              className="absolute right-2 md:right-10 top-[30%] -translate-y-1/2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-xl transition-all group active:scale-90 z-20 border border-gray-100 cursor-pointer hover:bg-[#003da6]"
+            >
+              <ChevronRight className="h-6 w-6 text-[#003da6] transition-colors group-hover:text-white" />
+            </motion.button>
+          </>
+        )}
 
-        {/* 31N Logo (Black Version) */}
-        <StaggerItem direction="scale">
-          <div className="flex items-end gap-2 mb-6 text-black scale-125">
-            <div className="flex flex-col items-center relative">
-              {/* Stylized compass arrow */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <div className="w-px h-3 bg-black/60" />
-                <div className="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-b-[6px] border-b-black" />
-              </div>
-              <div className="relative">
-                <span className="text-7xl font-bold leading-none tracking-tighter">
-                  31
-                </span>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center mt-1">
-                  <span className="text-[5px] uppercase font-bold tracking-widest bg-white px-1">
-                    Commercial Tower
-                  </span>
+        <div ref={sliderRef} className="keen-slider !overflow-visible">
+          {projects.map((project, index) => (
+            <div key={project.id} className="keen-slider__slide">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.1,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+                className="flex flex-col gap-6"
+              >
+                {/* Image Container */}
+                <motion.div
+                  initial={{ scale: 0.95 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="relative aspect-[16/9] overflow-hidden rounded-sm group"
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </motion.div>
+
+                {/* Content */}
+                <div className="flex flex-col gap-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.6,
+                      delay: index * 0.1 + 0.2,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className="flex gap-2"
+                  >
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-bold tracking-wider text-gray-400 bg-gray-100 px-3 py-1 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </motion.div>
+                  <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.6,
+                      delay: index * 0.1 + 0.3,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className="text-3xl md:text-4xl font-medium text-[#003da6]"
+                  >
+                    {project.title}
+                  </motion.h3>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.6,
+                      delay: index * 0.1 + 0.4,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className="text-gray-500 text-lg leading-relaxed max-w-2xl"
+                  >
+                    {project.description}
+                  </motion.p>
                 </div>
-              </div>
+              </motion.div>
             </div>
-            <span className="text-4xl font-light mb-1 uppercase tracking-tighter">
-              n
-            </span>
-          </div>
-        </StaggerItem>
-
-        {/* Subtitle */}
-        <StaggerItem direction="fade">
-          <div className="flex flex-col items-center">
-            <span className="text-[#b89156] text-4xl md:text-5xl font-serif italic mb-1">
-              Comfort
-            </span>
-            <span className="text-gray-500 text-lg md:text-xl font-medium uppercase tracking-[0.15em] leading-tight max-w-[300px]">
-              Are perfectly combined here
-            </span>
-          </div>
-        </StaggerItem>
-      </StaggerContainer>
-
-      {/* Content Area */}
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-        {/* Overlapping Images Container */}
-        <div className="relative w-full lg:w-1/2 flex items-center justify-center pt-10 h-[550px] md:h-[700px]">
-          {/* Left/Back Image (Pill-shaped) - Positioned behind */}
-          <motion.div
-            initial={{ opacity: 0, x: -80, rotate: -10 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="absolute left-0 top-0 w-[60%] aspect-[0.66] rounded-[300px] overflow-hidden z-0"
-          >
-            <Image
-              src="/assets/images/projects/project-1-image.jpg"
-              alt="Project View 1"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-
-          {/* Right/Front Image (Pill-shaped) - Positioned in front */}
-          <motion.div
-            initial={{ opacity: 0, x: 80, rotate: 10 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="absolute right-0 bottom-15 w-[60%] aspect-[0.66] rounded-[300px] overflow-hidden z-10"
-          >
-            <Image
-              src="/assets/images/projects/project-2-image.webp"
-              alt="Project View 2"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
+          ))}
         </div>
-
-        {/* Description Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          className="w-full lg:w-1/2 space-y-6 text-center lg:text-left"
-        >
-          <p className="text-gray-600 text-lg md:text-xl leading-relaxed font-light">
-            31 North Tower is the first Festival Tower in the heart of the New
-            Administrative Capital, combining an iconic architectural design
-            with an exceptional location along the Tourist Towers Strip in the
-            Downtown area, one of the most vibrant and strategic spots in the
-            city.
-          </p>
-        </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
