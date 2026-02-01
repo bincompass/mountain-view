@@ -16,13 +16,9 @@ export const metadata: Metadata = {
   description:
     "Mountain View is a leading private property developer in Egypt, specializing in first-tier residences and luxury resorts. Discover our projects across East and West Cairo, the Red Sea, and North Coast.",
   icons: {
-    icon: "/fav-icon.png",
-    shortcut: "/fav-icon.png",
-    apple: "/fav-icon.png",
-    other: {
-      rel: "apple-touch-icon-precomposed",
-      url: "/fav-icon.png",
-    },
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   keywords: [
     "Mountain View Egypt",
