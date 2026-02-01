@@ -3,15 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Facebook,
-  Instagram,
-  Youtube,
-  Linkedin,
-  Twitter,
-  ArrowRight,
-  ChevronUp,
-} from "lucide-react";
+import { ArrowRight, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
 
 const footerLinks = {
@@ -24,13 +16,6 @@ const footerLinks = {
   help: [
     { name: "Latest News", href: "/", scrollTo: "news" },
     { name: "Contact Us", href: "/", scrollTo: "register-interest" },
-  ],
-  socials: [
-    { icon: Facebook, href: "#" },
-    { icon: Twitter, href: "#" },
-    { icon: Instagram, href: "#" },
-    { icon: Linkedin, href: "#" },
-    { icon: Youtube, href: "#" },
   ],
 };
 
@@ -86,36 +71,6 @@ export default function Footer() {
                   className="h-10 md:h-12 w-auto brightness-0 invert"
                 />
               </Link>
-            </motion.div>
-            <div className="hidden md:block w-px h-8 bg-white/20" />
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: 0.2,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
-              className="flex items-center gap-5"
-            >
-              {footerLinks.socials.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 0.3 + index * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  className="text-white/60 hover:text-white transition-all hover:scale-110"
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
             </motion.div>
           </div>
 
