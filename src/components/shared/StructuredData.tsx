@@ -96,7 +96,7 @@ export default function StructuredData() {
         "@type": "ListItem",
         position: 5,
         name: "Contact Us",
-        item: `${baseUrl}/calendly`,
+        item: `${baseUrl}/#register-interest`,
       },
     ],
   };

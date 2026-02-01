@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Phone, Menu, Calendar } from "lucide-react";
 import { useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import MobileMenu from "./mobile-menu";
 
@@ -13,11 +14,12 @@ export const navLinks = [
   { title: "Innovation", href: "/#innovation" },
   { title: "The Lighthouse", href: "/#lighthouse" },
   { title: "Latest News", href: "/#news" },
-  { title: "Contact us", href: "/calendly" },
+  { title: "Contact us", href: "/#register-interest" },
 ];
 
 export default function Navbar({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
@@ -31,6 +33,21 @@ export default function Navbar({ className }: { className?: string }) {
     timeoutRef.current = setTimeout(() => {
       setOpen(false);
     }, 150);
+  };
+
+  const handleScrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      const id = href.replace("/#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setOpen(false);
   };
 
   return (
@@ -73,7 +90,7 @@ export default function Navbar({ className }: { className?: string }) {
                     <Link
                       key={link.title}
                       href={link.href}
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => handleScrollToSection(e, link.href)}
                       className="px-8 py-3 hover:bg-gray-50/50 transition-all group"
                     >
                       <span className="text-[1.1rem] font-medium text-primary block group-hover:translate-x-2 transition-transform duration-300">
@@ -100,7 +117,8 @@ export default function Navbar({ className }: { className?: string }) {
 
         {/* Register Interest Button */}
         <Link
-          href="/calendly"
+          href="/#register-interest"
+          onClick={(e) => handleScrollToSection(e, "/#register-interest")}
           className={cn(
             "hidden lg:flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white transition-all active:scale-95",
             open ? "rounded-tr-md" : "rounded-r-md",

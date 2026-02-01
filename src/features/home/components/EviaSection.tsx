@@ -56,12 +56,15 @@ export default function EviaSection() {
               direction="up"
               className="pt-4 flex flex-col sm:flex-row gap-4"
             >
-              <button className="bg-[#003da6] text-white px-5 py-4 flex items-center justify-center gap-2 group transition-all duration-300 hover:bg-[#002d7a] font-medium text-sm tracking-wider uppercase rounded-md cursor-pointer">
-                DISCOVER EVIA
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-
-              <button className="border border-gray-200 text-[#003da6] px-5 py-4 flex items-center justify-center gap-2 transition-all duration-300 hover:bg-gray-50 font-medium text-sm tracking-wider uppercase rounded-md cursor-pointer">
+              <button
+                onClick={() => {
+                  const element = document.getElementById("register-interest");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="border border-gray-200 text-[#003da6] px-5 py-4 flex items-center justify-center gap-2 transition-all duration-300 hover:bg-gray-50 font-medium text-sm tracking-wider uppercase rounded-md cursor-pointer"
+              >
                 <Calendar className="w-4 h-4" />
                 SCHEDULE CALL
               </button>

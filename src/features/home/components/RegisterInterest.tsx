@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -20,31 +21,72 @@ const formSchema = z.object({
     message: "Invalid phone number",
   }),
   email: z.string().email("Invalid email address"),
-  message: z.string().optional(),
+  message: z.string().min(5, "Message must be at least 5 characters"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
 export default function RegisterInterest() {
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       phone: "",
+      message: "",
     },
   });
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
-    // Add submission logic here
+    setSubmitStatus({ type: null, message: "" });
+    try {
+      const response = await fetch(
+        "https://api.incompassonline.com/api/incompass/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            full_name: data.fullName,
+            email: data.email,
+            mobile: data.phone,
+            subject: "Inquiry about Services",
+            message: data.message,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to send message. Please try again later.");
+      }
+
+      setSubmitStatus({
+        type: "success",
+        message: "Thank you! Your message has been sent successfully.",
+      });
+      reset();
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message:
+          error instanceof Error ? error.message : "Something went wrong.",
+      });
+    }
   };
 
   return (
-    <section className="py-20 px-6">
+    <section id="register-interest" className="py-20 px-6">
       <div className="max-w-3xl mx-auto text-center">
         <StaggerContainer staggerDelay={0.15} initialDelay={0.2}>
           {/* Header Section */}
@@ -125,11 +167,29 @@ export default function RegisterInterest() {
               <div className="relative">
                 <textarea
                   {...register("message")}
-                  placeholder="Write your message (optional)"
+                  placeholder="Write your message"
                   rows={6}
                   className="w-full px-4 py-4 border border-gray-200 focus:border-[#001A70] outline-none transition-colors placeholder:text-gray-300 font-light resize-none rounded-md"
                 />
+                {errors.message && (
+                  <span className="text-red-500 text-xs mt-1">
+                    {errors.message.message}
+                  </span>
+                )}
               </div>
+
+              {/* Submit Status Message */}
+              {submitStatus.type && (
+                <div
+                  className={`p-4 rounded-md text-sm ${
+                    submitStatus.type === "success"
+                      ? "bg-green-50 text-green-800 border border-green-200"
+                      : "bg-red-50 text-red-800 border border-red-200"
+                  }`}
+                >
+                  {submitStatus.message}
+                </div>
+              )}
 
               {/* Submit Button */}
               <div className="flex justify-end pt-4">

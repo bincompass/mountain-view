@@ -5,9 +5,6 @@ import { usePathname } from "next/navigation";
 import Navbar from "./navbar";
 
 export default function Header() {
-  const pathname = usePathname();
-  const isCalendlyPage = pathname === "/calendly";
-
   return (
     <header className="absolute top-0 z-50 w-full bg-white lg:bg-transparent border-b border-gray-100 lg:border-none">
       <div className="container flex h-20 lg:h-24 items-center justify-between py-4">
@@ -18,7 +15,7 @@ export default function Header() {
             alt="Mountain View Logo"
             width={150}
             height={60}
-            className={`h-8 lg:h-12 w-auto ${!isCalendlyPage ? "lg:brightness-0 lg:invert" : ""}`}
+            className="h-8 lg:h-12 w-auto lg:brightness-0 lg:invert"
             priority
           />
         </Link>

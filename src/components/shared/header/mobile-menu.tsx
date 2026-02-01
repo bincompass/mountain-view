@@ -118,8 +118,8 @@ export default function MobileMenu() {
             {/* Bottom Actions */}
             <div className="p-8 space-y-4">
               <Link
-                href="/calendly"
-                onClick={() => setOpen(false)}
+                href="/#register-interest"
+                onClick={(e) => handleLinkClick(e, "/#register-interest")}
                 className="flex items-center justify-center gap-3 px-6 py-5 bg-[#001A70] text-white text-sm font-bold uppercase tracking-wider rounded-md active:scale-[0.98] transition-all w-full"
               >
                 <Calendar className="h-4 w-4" />

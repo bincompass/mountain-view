@@ -16,16 +16,14 @@ import { motion } from "framer-motion";
 
 const footerLinks = {
   company: [
-    { name: "Life at MV", href: "/" },
-    { name: "Our Story", href: "/", scrollTo: "story-section" },
-    { name: "Sustainability", href: "/" },
-    { name: "MV Foundation", href: "/" },
-    { name: "Media Room", href: "/", scrollTo: "news" },
-    { name: "E-Services", href: "/" },
+    { name: "Communities", href: "/", scrollTo: "projects" },
+    { name: "Evia", href: "/", scrollTo: "evia" },
+    { name: "Innovation", href: "/", scrollTo: "innovation" },
+    { name: "The Lighthouse", href: "/", scrollTo: "lighthouse" },
   ],
   help: [
+    { name: "Latest News", href: "/", scrollTo: "news" },
     { name: "Contact Us", href: "/", scrollTo: "register-interest" },
-    { name: "Careers", href: "/" },
   ],
   socials: [
     { icon: Facebook, href: "#" },
@@ -138,71 +136,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Main Footer Content */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
-          {/* Newsletter Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{
-              duration: 0.8,
-              delay: 0.2,
-              ease: [0.25, 0.1, 0.25, 1],
-            }}
-            className="lg:col-span-6 space-y-8"
-          >
-            <div className="space-y-4">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.3,
-                  ease: [0.25, 0.1, 0.25, 1],
-                }}
-                className="text-4xl md:text-5xl font-normal tracking-tight"
-              >
-                Stay in the Loop.
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.4,
-                  ease: [0.25, 0.1, 0.25, 1],
-                }}
-                className="text-white/60 text-lg font-light max-w-md leading-relaxed"
-              >
-                Sign up to receive the latest updates on new projects, exclusive
-                offers and events.
-              </motion.p>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: 0.5,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
-              className="relative max-w-md"
-            >
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full bg-white text-[#000F3D] px-6 py-5 rounded-sm outline-none placeholder:text-[#000F3D]/40 text-lg"
-              />
-              <button className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-[#001A70] hover:translate-x-1 transition-transform">
-                <ArrowRight className="w-6 h-6" />
-              </button>
-            </motion.div>
-          </motion.div>
-
+        <div className="py-20">
           {/* Links Sections */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -213,9 +147,9 @@ export default function Footer() {
               delay: 0.3,
               ease: [0.25, 0.1, 0.25, 1],
             }}
-            className="lg:col-span-6 grid grid-cols-2 gap-8 lg:justify-items-end"
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 justify-items-start"
           >
-            <div className="space-y-8">
+            <div className="space-y-8 text-left">
               <motion.h4
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -256,7 +190,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-8 text-left">
               <motion.h4
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -316,7 +250,7 @@ export default function Footer() {
               delay: 0.5,
               ease: [0.25, 0.1, 0.25, 1],
             }}
-            className="text-sm text-white/40 font-light"
+            className="text-sm text-white/40 font-light text-center md:text-left"
           >
             Copyright © 2026 Mountain View. All rights reserved.
           </motion.p>
@@ -330,7 +264,7 @@ export default function Footer() {
               delay: 0.6,
               ease: [0.25, 0.1, 0.25, 1],
             }}
-            className="text-sm text-white/40 font-light"
+            className="text-sm text-white/40 font-light text-center md:text-right"
           >
             Design & Development by Mitch Designs
           </motion.p>

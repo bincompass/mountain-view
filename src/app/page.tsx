@@ -5,6 +5,8 @@ import EviaSection from "@/features/home/components/EviaSection";
 import InnovationSection from "@/features/home/components/InnovationSection";
 import LighthouseSection from "@/features/home/components/LighthouseSection";
 import LatestNews from "@/features/home/components/LatestNews";
+import RegisterInterest from "@/features/home/components/RegisterInterest";
+import FloatingActions from "@/components/shared/FloatingActions";
 
 export default function Home() {
   return (
@@ -16,6 +18,8 @@ export default function Home() {
       <InnovationSection />
       <LighthouseSection />
       <LatestNews />
+      <RegisterInterest />
+      <FloatingActions />
     </main>
   );
 }
