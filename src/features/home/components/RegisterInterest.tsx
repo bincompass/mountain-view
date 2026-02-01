@@ -49,23 +49,22 @@ export default function RegisterInterest() {
   const onSubmit = async (data: FormValues) => {
     setSubmitStatus({ type: null, message: "" });
     try {
-      const response = await fetch(
-        "https://api.incompassonline.com/api/incompass/send-email",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            full_name: data.fullName,
-            email: data.email,
-            mobile: data.phone,
-            subject: "Inquiry about Services",
-            message: data.message,
-          }),
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL || "https://api.incompassonline.com";
+      const response = await fetch(`${baseUrl}/api/incompass/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-      );
+        body: JSON.stringify({
+          full_name: data.fullName,
+          email: data.email,
+          mobile: data.phone,
+          subject: "Inquiry about Services",
+          message: data.message,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to send message. Please try again later.");
