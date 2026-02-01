@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, ChevronUp } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
 
 const footerLinks = {
