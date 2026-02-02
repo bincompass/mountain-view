@@ -2,16 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Phone,
-  Menu,
-  Calendar,
-  X,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Youtube,
-} from "lucide-react";
+import { Phone, Menu, Calendar, X } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -20,12 +11,11 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { navLinks } from "./navbar";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "16201";
 
   const handleLinkClick = (
@@ -48,21 +38,6 @@ export default function MobileMenu() {
       }, 300);
     }
   };
-
-  const socialLinks = [
-    { icon: Facebook, href: "#" },
-    {
-      icon: () => (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      ),
-      href: "#",
-    },
-    { icon: Instagram, href: "#" },
-    { icon: Linkedin, href: "#" },
-    { icon: Youtube, href: "#" },
-  ];
 
   return (
     <div className="lg:hidden flex items-center">
@@ -133,40 +108,6 @@ export default function MobileMenu() {
                 <Phone className="h-4 w-4" />
                 <span>Call Us</span>
               </a>
-
-              {/* Social Follow */}
-              <div className="pt-8 flex flex-col gap-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#222] rounded-full flex items-center justify-center p-2">
-                      <Image
-                        src="/assets/images/logos/main-logo.png"
-                        alt="Logo Mark"
-                        width={24}
-                        height={24}
-                        className="brightness-0 invert object-contain"
-                      />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">
-                      Follow Us
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    {socialLinks.map((social, idx) => {
-                      const Icon = social.icon;
-                      return (
-                        <Link
-                          key={idx}
-                          href={social.href}
-                          className="text-[#001A70] hover:opacity-70 transition-opacity"
-                        >
-                          <Icon className="h-5 w-5" />
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </SheetContent>
